@@ -88,9 +88,11 @@ public class TripService {
                 Long mgrId = saved.getApprovingManager().getId();
                 log.info("Publishing submission event for manager id={} tripId={}", mgrId, saved.getId());
                 eventPublisher.publishEvent(new StatusChangeEvent(
-                        mgrId,
-                        "New Trip Request Submitted",
-                        "A trip request has been submitted by " + saved.getEmployee().getUsername() + " and requires your review."
+                    mgrId,
+                    "New Trip Request Submitted",
+                    "A trip request has been submitted by " + saved.getEmployee().getUsername() + " and requires your review.",
+                    saved.getEmployee() != null ? saved.getEmployee().getId() : null,
+                    saved.getEmployee() != null ? saved.getEmployee().getUsername() : null
                 ));
             } else {
                 log.info("No approving manager set for tripId={}", saved.getId());
@@ -100,11 +102,13 @@ public class TripService {
         }
 
         try {
-            eventPublisher.publishEvent(new StatusChangeEvent(
+                eventPublisher.publishEvent(new StatusChangeEvent(
                     saved.getEmployee().getId(),
                     "Trip Request Submitted",
-                    "Your trip request to " + saved.getDestination() + " has been successfully submitted."
-            ));
+                    "Your trip request to " + saved.getDestination() + " has been successfully submitted.",
+                    saved.getEmployee() != null ? saved.getEmployee().getId() : null,
+                    saved.getEmployee() != null ? saved.getEmployee().getUsername() : null
+                ));
         } catch (Exception e) {
             log.error("Error while publishing employee notification for tripId={}: {}", saved.getId(), e.getMessage());
         }
@@ -133,9 +137,11 @@ public class TripService {
 
         // Notify employee
         eventPublisher.publishEvent(new StatusChangeEvent(
-                trip.getEmployee().getId(),
-                "Trip Request " + newStatus.name(),
-                "Your trip request to " + trip.getDestination() + " has been " + newStatus.name().toLowerCase() + " by " + manager.getUsername() + "."
+            trip.getEmployee().getId(),
+            "Trip Request " + newStatus.name(),
+            "Your trip request to " + trip.getDestination() + " has been " + newStatus.name().toLowerCase() + " by " + manager.getUsername() + ".",
+            manager != null ? manager.getId() : null,
+            manager != null ? manager.getUsername() : null
         ));
 
         return saved;

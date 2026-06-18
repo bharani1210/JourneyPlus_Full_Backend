@@ -36,6 +36,7 @@ C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\mai
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\trip\dto\SimpleUserDTO.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\trip\dto\TripResponse.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\trip\dto\VisaStatus.java
+C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\expense\dto\ExpenseClaimRequest.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\trip\entity\TripRequest.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\trip\controller\ItineraryController.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\iam\dto\RegisterRequest.java
@@ -45,6 +46,7 @@ C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\mai
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\expense\repository\ExpenseClaimRepository.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\advance\repository\AdvanceSettlementRepository.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\common\CryptoUtils.java
+C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\audit\dto\AuditLogDTO.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\document\storage\StorageService.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\trip\repository\VisaRequirementRepository.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\expense\repository\ReimbursementRepository.java
@@ -96,3 +98,4 @@ C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\mai
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\iam\controller\AdminUserApprovalController.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\common\controller\RestExceptionHandler.java
 C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\compliance\controller\ComplianceController.java
+C:\Users\2503742\OneDrive - Cognizant\Desktop\final Backend\Journey_plus\src\main\java\com\journeyplus\expense\dto\ExpenseLineRequest.java

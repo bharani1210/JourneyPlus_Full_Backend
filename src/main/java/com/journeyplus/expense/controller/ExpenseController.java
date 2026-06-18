@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
 
@@ -28,27 +29,53 @@ public class ExpenseController {
 
     @PostMapping
     @PreAuthorize("hasRole('EMPLOYEE')")
+    @Operation(summary = "Create an expense claim", description = "Create an expense claim for a trip. Provide 'tripRequestId' as request parameter and claim fields in the JSON body.")
     public ResponseEntity<ExpenseClaim> createExpenseClaim(
             @RequestParam Long tripRequestId,
-            @RequestBody ExpenseClaim claim,
+            @RequestBody com.journeyplus.expense.dto.ExpenseClaimRequest claimRequest,
             @AuthenticationPrincipal User employee) {
-        
+
         TripRequest trip = tripService.getTripRequest(tripRequestId);
         if (!trip.getEmployee().getId().equals(employee.getId())) {
             throw new IllegalArgumentException("Trip request does not belong to the authenticated employee");
         }
 
+        // Map minimal incoming request to ExpenseClaim entity
+        ExpenseClaim claim = new ExpenseClaim();
         claim.setTripRequest(trip);
         claim.setEmployee(employee);
+        claim.setClaimTitle(claimRequest.getClaimTitle());
+        claim.setSubmittedDate(claimRequest.getSubmittedDate());
+        if (claimRequest.getTotalAmount() != null) claim.setTotalAmount(new java.math.BigDecimal(claimRequest.getTotalAmount().toString()));
+        claim.setOriginalCurrency(claimRequest.getOriginalCurrency());
+
         return ResponseEntity.ok(expenseService.createExpenseClaim(claim));
     }
 
     @PostMapping("/{claimId}/lines")
     @PreAuthorize("hasRole('EMPLOYEE')")
+    @Operation(summary = "Add an expense line", description = "Add an expense line to an existing claim. Provide expense line JSON in the request body.")
     public ResponseEntity<ExpenseLine> addExpenseLine(
             @PathVariable Long claimId,
-            @RequestBody ExpenseLine line) {
+            @RequestBody com.journeyplus.expense.dto.ExpenseLineRequest lineRequest) {
+        // Map minimal incoming fields to the ExpenseLine entity; do not require caller to send internal fields
+        ExpenseLine line = new ExpenseLine();
+        line.setExpenseDate(lineRequest.getExpenseDate());
+        line.setCategory(lineRequest.getCategory());
+        line.setAmount(lineRequest.getAmount());
+        line.setOriginalCurrency(lineRequest.getOriginalCurrency());
+        line.setReceiptPath(lineRequest.getReceiptPath());
+
         return ResponseEntity.ok(expenseService.addExpenseLine(claimId, line));
+    }
+
+    @PostMapping("/{claimId}/lines/{lineId}/submit")
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @Operation(summary = "Submit an expense line for compliance re-check", description = "Trigger compliance re-check and persist the expense line. This does not submit the entire claim.")
+    public ResponseEntity<ExpenseLine> submitExpenseLine(
+            @PathVariable Long claimId,
+            @PathVariable Long lineId) {
+        return ResponseEntity.ok(expenseService.submitExpenseLine(claimId, lineId));
     }
 
     @PostMapping("/{claimId}/submit")
@@ -77,6 +104,7 @@ public class ExpenseController {
 
     @PostMapping("/{claimId}/reimburse")
     @PreAuthorize("hasRole('FINANCE_EXECUTIVE')")
+    @Operation(summary = "Disburse reimbursement", description = "Create a reimbursement record for a claim. Provide reimbursement JSON in the request body.")
     public ResponseEntity<ExpenseClaim> disburseReimbursement(
             @PathVariable Long claimId,
             @RequestBody Reimbursement reimbursement) {

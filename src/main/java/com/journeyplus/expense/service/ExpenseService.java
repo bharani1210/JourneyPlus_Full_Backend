@@ -160,10 +160,12 @@ public class ExpenseService {
             log.info("Publishing status event for approving manager ID: {} for submitted claim ID: {}", 
                     claim.getTripRequest().getApprovingManager().getId(), claimId);
             eventPublisher.publishEvent(new StatusChangeEvent(
-                    claim.getTripRequest().getApprovingManager().getId(),
-                    "Expense Claim Submitted",
-                    "An expense claim titled '" + claim.getClaimTitle() + "' has been submitted by " + 
-                    claim.getEmployee().getUsername() + " and is awaiting your review."
+                claim.getTripRequest().getApprovingManager().getId(),
+                "Expense Claim Submitted",
+                "An expense claim titled '" + claim.getClaimTitle() + "' has been submitted by " + 
+                claim.getEmployee().getUsername() + " and is awaiting your review.",
+                claim.getEmployee() != null ? claim.getEmployee().getId() : null,
+                claim.getEmployee() != null ? claim.getEmployee().getUsername() : null
             ));
         } else {
             log.warn("No approving manager found for trip request associated with claim ID: {}", claimId);
@@ -197,12 +199,14 @@ public class ExpenseService {
         ExpenseClaim saved = expenseClaimRepository.save(claim);
         log.info("Claim ID: {} status successfully updated to {} by manager", claimId, newStatus);
 
-        // Notify Employee
+        // Notify Employee (actor = manager)
         log.info("Publishing status event to employee ID: {} for reviewed claim ID: {}", claim.getEmployee().getId(), claimId);
         eventPublisher.publishEvent(new StatusChangeEvent(
-                claim.getEmployee().getId(),
-                "Expense Claim " + newStatus.name(),
-                "Your expense claim '" + claim.getClaimTitle() + "' has been " + newStatus.name().toLowerCase() + "."
+            claim.getEmployee().getId(),
+            "Expense Claim " + newStatus.name(),
+            "Your expense claim '" + claim.getClaimTitle() + "' has been " + newStatus.name().toLowerCase() + ".",
+            manager != null ? manager.getId() : null,
+            manager != null ? manager.getUsername() : null
         ));
 
         return saved;
@@ -235,13 +239,15 @@ public class ExpenseService {
         reimbursementRepository.save(reimbursement);
         log.info("Reimbursement record created successfully for claim ID: {}, payment method: {}", claimId, reimbursement.getPaymentMethod());
 
-        // Notify Employee
+        // Notify Employee (no explicit actor available for payment operation)
         log.info("Publishing status event to employee ID: {} for PAID claim ID: {}", claim.getEmployee().getId(), claimId);
         eventPublisher.publishEvent(new StatusChangeEvent(
-                claim.getEmployee().getId(),
-                "Expense Claim Paid",
-                "Your expense claim '" + claim.getClaimTitle() + "' has been fully paid via " + 
-                reimbursement.getPaymentMethod() + "."
+            claim.getEmployee().getId(),
+            "Expense Claim Paid",
+            "Your expense claim '" + claim.getClaimTitle() + "' has been fully paid via " + 
+            reimbursement.getPaymentMethod() + ".",
+            null,
+            null
         ));
 
         return savedClaim;
@@ -264,5 +270,32 @@ public class ExpenseService {
     public List<ExpenseLine> getLinesByClaim(Long claimId) {
         log.info("Retrieving expense lines for claim ID: {}", claimId);
         return expenseLineRepository.findByExpenseClaim_Id(claimId);
+    }
+
+    @Transactional
+    @AuditAction(module = "EXPENSE", action = "SUBMIT_EXPENSE_LINE")
+    public ExpenseLine submitExpenseLine(Long claimId, Long lineId) {
+        log.info("Attempting to submit expense line ID: {} for claim ID: {}", lineId, claimId);
+        ExpenseClaim claim = expenseClaimRepository.findById(claimId)
+                .orElseThrow(() -> new IllegalArgumentException("Expense claim not found"));
+
+        ExpenseLine line = expenseLineRepository.findById(lineId)
+                .orElseThrow(() -> new IllegalArgumentException("Expense line not found"));
+
+        if (line.getExpenseClaim() == null || !line.getExpenseClaim().getId().equals(claim.getId())) {
+            log.warn("Line {} does not belong to claim {}", lineId, claimId);
+            throw new IllegalArgumentException("Expense line does not belong to the provided claim");
+        }
+
+        if (claim.getStatus() != ExpenseStatus.DRAFT) {
+            log.warn("Cannot submit line: Claim {} is in state {}", claimId, claim.getStatus());
+            throw new IllegalStateException("Can only submit lines for claims in DRAFT state");
+        }
+
+        // Re-run policy compliance to ensure line is evaluated before final claim submission
+        complianceEngine.runComplianceCheck(line);
+        ExpenseLine saved = expenseLineRepository.save(line);
+        log.info("Expense line ID: {} re-checked and saved", saved.getId());
+        return saved;
     }
 }

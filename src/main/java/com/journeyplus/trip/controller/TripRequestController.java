@@ -105,8 +105,33 @@ public class TripRequestController {
 
     @PostMapping("/{id}/submit")
     @PreAuthorize("hasRole('EMPLOYEE')")
-    public ResponseEntity<TripRequest> submitTripRequest(@PathVariable Long id) {
-        return ResponseEntity.ok(tripService.submitTripRequest(id));
+    public ResponseEntity<TripResponse> submitTripRequest(@PathVariable Long id) {
+        try {
+            // Read current trip status first to avoid throwing and to provide idempotent responses
+            TripRequest current = tripService.getTripRequest(id);
+            if (current == null) {
+                return ResponseEntity.status(404).body(null);
+            }
+
+            // If not in DRAFT state, return appropriate response without invoking submit
+            if (current.getStatus() != TripStatus.DRAFT) {
+                if (current.getStatus() == TripStatus.SUBMITTED) {
+                    // Already submitted — return 200 with current trip (idempotent)
+                    return ResponseEntity.ok(toTripResponse(current));
+                }
+                // Other non-allowed states -> 409 Conflict with current trip in body
+                return ResponseEntity.status(409).body(toTripResponse(current));
+            }
+
+            TripRequest saved = tripService.submitTripRequest(id);
+            return ResponseEntity.ok(toTripResponse(saved));
+        } catch (IllegalArgumentException e) {
+            // Trip not found or other invalid argument
+            return ResponseEntity.status(404).body(null);
+        } catch (Exception e) {
+            // Unexpected error: return 500 with no stacktrace
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
     @PostMapping("/{id}/approve")
@@ -149,8 +174,10 @@ public class TripRequestController {
 
     @GetMapping("/pending-approvals")
     @PreAuthorize("hasRole('APPROVING_MANAGER')")
-    public ResponseEntity<List<TripRequest>> getPendingApprovals(@AuthenticationPrincipal User manager) {
-        return ResponseEntity.ok(tripService.getTripsForManager(manager.getId()));
+    public ResponseEntity<List<TripResponse>> getPendingApprovals(@AuthenticationPrincipal User manager) {
+        List<TripRequest> trips = tripService.getTripsForManager(manager.getId());
+        List<TripResponse> dto = trips.stream().map(this::toTripResponse).collect(java.util.stream.Collectors.toList());
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/{id}")

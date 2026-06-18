@@ -1,1 +1,4 @@
+com\journeyplus\expense\service\ExpenseServiceTest.class
+com\journeyplus\trip\service\TripServiceTest.class
+com\journeyplus\iam\service\AuthServiceTest.class
 com\journeyplus\policy\service\PolicyServiceTest.class

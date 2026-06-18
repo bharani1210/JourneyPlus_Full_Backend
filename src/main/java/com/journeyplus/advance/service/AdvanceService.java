@@ -39,10 +39,12 @@ public class AdvanceService {
         // Notify Approving Manager
         if (request.getTripRequest().getApprovingManager() != null) {
             eventPublisher.publishEvent(new StatusChangeEvent(
-                    request.getTripRequest().getApprovingManager().getId(),
-                    "New Advance Request",
-                    "A cash advance of " + request.getAmount() + " " + request.getOriginalCurrency() + 
-                    " has been requested by " + request.getEmployee().getUsername() + "."
+                request.getTripRequest().getApprovingManager().getId(),
+                "New Advance Request",
+                "A cash advance of " + request.getAmount() + " " + request.getOriginalCurrency() + 
+                " has been requested by " + request.getEmployee().getUsername() + ".",
+                request.getEmployee() != null ? request.getEmployee().getId() : null,
+                request.getEmployee() != null ? request.getEmployee().getUsername() : null
             ));
         }
 
@@ -63,12 +65,14 @@ public class AdvanceService {
         request.setApprover(approver);
         AdvanceRequest saved = advanceRequestRepository.save(request);
 
-        // Notify Employee
+        // Notify Employee (actor = approver)
         eventPublisher.publishEvent(new StatusChangeEvent(
-                request.getEmployee().getId(),
-                "Advance Request Approved",
-                "Your cash advance request for " + request.getAmount() + " " + request.getOriginalCurrency() + 
-                " has been approved by " + approver.getUsername() + "."
+            request.getEmployee().getId(),
+            "Advance Request Approved",
+            "Your cash advance request for " + request.getAmount() + " " + request.getOriginalCurrency() + 
+            " has been approved by " + approver.getUsername() + ".",
+            approver != null ? approver.getId() : null,
+            approver != null ? approver.getUsername() : null
         ));
 
         return saved;
@@ -90,10 +94,12 @@ public class AdvanceService {
 
         // Notify Employee
         eventPublisher.publishEvent(new StatusChangeEvent(
-                request.getEmployee().getId(),
-                "Advance Disbursed",
-                "Your cash advance of " + request.getAmount() + " " + request.getOriginalCurrency() + 
-                " has been disbursed to your account."
+            request.getEmployee().getId(),
+            "Advance Disbursed",
+            "Your cash advance of " + request.getAmount() + " " + request.getOriginalCurrency() + 
+            " has been disbursed to your account.",
+            null,
+            null
         ));
 
         return saved;
@@ -119,10 +125,12 @@ public class AdvanceService {
 
         // Notify Employee
         eventPublisher.publishEvent(new StatusChangeEvent(
-                request.getEmployee().getId(),
-                "Advance Request Settled",
-                "Your cash advance of " + request.getAmount() + " " + request.getOriginalCurrency() + 
-                " has been successfully settled."
+            request.getEmployee().getId(),
+            "Advance Request Settled",
+            "Your cash advance of " + request.getAmount() + " " + request.getOriginalCurrency() + 
+            " has been successfully settled.",
+            null,
+            null
         ));
 
         return savedRequest;
@@ -143,10 +151,12 @@ public class AdvanceService {
 
         // Notify Employee
         eventPublisher.publishEvent(new StatusChangeEvent(
-                request.getEmployee().getId(),
-                "Advance Request Forfeited",
-                "Your cash advance request of " + request.getAmount() + " " + request.getOriginalCurrency() + 
-                " has been forfeited."
+            request.getEmployee().getId(),
+            "Advance Request Forfeited",
+            "Your cash advance request of " + request.getAmount() + " " + request.getOriginalCurrency() + 
+            " has been forfeited.",
+            null,
+            null
         ));
 
         return saved;

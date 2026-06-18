@@ -30,7 +30,7 @@ public class StatusChangeEventListener {
             User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found for notification: " + userId));
 
-            Notification notification = new Notification(user, event.getTitle(), event.getMessage());
+            Notification notification = new Notification(user, event.getTitle(), event.getMessage(), event.getActorId(), event.getActorName());
             notificationRepository.save(notification);
         } catch (Exception e) {
             org.slf4j.LoggerFactory.getLogger(StatusChangeEventListener.class)
