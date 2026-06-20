@@ -1,0 +1,45 @@
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.util.Base64;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class KeyGeneratorTool {
+
+    private static final int KEY_SIZE = 2048;
+    private static final String OUTPUT_DIR = "src/main/resources/keys";
+
+    public static void main(String[] args) throws Exception {
+        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+        generator.initialize(KEY_SIZE);
+        KeyPair keyPair = generator.generateKeyPair();
+
+        String privatePem = toPem(keyPair.getPrivate().getEncoded(), "PRIVATE KEY"); // PKCS8
+        String publicPem  = toPem(keyPair.getPublic().getEncoded(), "PUBLIC KEY");   // X.509
+
+        Path dir = Paths.get(OUTPUT_DIR);
+        Files.createDirectories(dir);
+
+        Path privatePath = dir.resolve("private.pem");
+        Path publicPath  = dir.resolve("public.pem");
+
+        Files.writeString(privatePath, privatePem);
+        Files.writeString(publicPath, publicPem);
+
+        System.out.println("RSA key pair generated (" + KEY_SIZE + "-bit):");
+        System.out.println("  Private key -> " + privatePath.toAbsolutePath());
+        System.out.println("  Public key  -> " + publicPath.toAbsolutePath());
+    }
+
+    private static String toPem(byte[] derBytes, String type) {
+        String base64 = Base64.getEncoder().encodeToString(derBytes);
+        StringBuilder sb = new StringBuilder();
+        sb.append("-----BEGIN ").append(type).append("-----\n");
+        for (int i = 0; i < base64.length(); i += 64) {
+            sb.append(base64, i, Math.min(i + 64, base64.length())).append("\n");
+        }
+        sb.append("-----END ").append(type).append("-----\n");
+        return sb.toString();
+    }
+}

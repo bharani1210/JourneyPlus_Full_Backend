@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "password_hash", nullable = false)
-    @JsonIgnore
+    @JsonIgnore //
     private String password;
 
     @Enumerated(EnumType.STRING)

@@ -49,7 +49,7 @@ public class ExpenseController {
         if (claimRequest.getTotalAmount() != null) claim.setTotalAmount(new java.math.BigDecimal(claimRequest.getTotalAmount().toString()));
         claim.setOriginalCurrency(claimRequest.getOriginalCurrency());
 
-        return ResponseEntity.ok(expenseService.createExpenseClaim(claim));
+        return ResponseEntity.ok(expenseService.createExpenseClaim(claim, claimRequest.getExpenseLines()));
     }
 
     @PostMapping("/{claimId}/lines")

@@ -5,6 +5,7 @@ com\journeyplus\trip\dto\VisaRequirementInput.class
 com\journeyplus\trip\dto\TripCreationRequest.class
 com\journeyplus\trip\entity\TripStatus.class
 com\journeyplus\config\OpenApiConfig.class
+com\journeyplus\expense\dto\ExpenseClaimRequest.class
 com\journeyplus\expense\entity\ExpenseClaim.class
 com\journeyplus\document\entity\Document.class
 com\journeyplus\iam\controller\UserController.class
@@ -33,6 +34,7 @@ com\journeyplus\trip\entity\ItineraryLeg.class
 com\journeyplus\config\AuditAction.class
 com\journeyplus\trip\repository\TripRequestRepository.class
 com\journeyplus\trip\dto\BookingRequest.class
+com\journeyplus\audit\dto\AuditLogDTO.class
 com\journeyplus\analytics\controller\ReportController.class
 com\journeyplus\audit\repository\AuditLogRepository.class
 com\journeyplus\trip\entity\TripRequest.class
@@ -71,6 +73,7 @@ com\journeyplus\config\SwaggerSecurityConfig.class
 com\journeyplus\common\GlobalExceptionHandler.class
 com\journeyplus\analytics\entity\TravelReport.class
 com\journeyplus\event\StatusChangeEvent.class
+com\journeyplus\expense\dto\ExpenseLineRequest.class
 com\journeyplus\notification\controller\NotificationController.class
 com\journeyplus\trip\dto\ItineraryLegInput.class
 com\journeyplus\document\storage\LocalStorageService.class

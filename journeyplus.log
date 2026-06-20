@@ -1325,3 +1325,312 @@ java.lang.NullPointerException: null
 2026-06-18T16:15:44.350+05:30  INFO 27144 --- [journeyplus-backend] [http-nio-8091-exec-3] c.j.expense.service.ExpenseService       : Manager 'lovely' attempting to set status of claim ID: 5 to APPROVED
 2026-06-18T16:15:44.350+05:30  WARN 27144 --- [journeyplus-backend] [http-nio-8091-exec-3] c.j.expense.service.ExpenseService       : Failed to review: Claim ID 5 is in state DRAFT, only SUBMITTED claims can be approved or rejected
 2026-06-18T17:03:11.149+05:30  WARN 27144 --- [journeyplus-backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=45m45s561ms418µs800ns).
+2026-06-19T21:25:36.366+05:30  INFO 21764 --- [journeyplus-backend] [main] com.journeyplus.JourneyPlusApplication   : Starting JourneyPlusApplication using Java 21 with PID 21764 (C:\Users\2503742\OneDrive - Cognizant\Documents\New Github\Final-JourneyPlus\target\classes started by 2503742 in C:\Users\2503742\OneDrive - Cognizant\Documents\New Github\Final-JourneyPlus)
+2026-06-19T21:25:36.372+05:30  INFO 21764 --- [journeyplus-backend] [main] com.journeyplus.JourneyPlusApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-19T21:25:39.135+05:30  INFO 21764 --- [journeyplus-backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19T21:25:39.401+05:30  INFO 21764 --- [journeyplus-backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 238 ms. Found 17 JPA repository interfaces.
+2026-06-19T21:25:41.457+05:30  INFO 21764 --- [journeyplus-backend] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8091 (http)
+2026-06-19T21:25:41.505+05:30  INFO 21764 --- [journeyplus-backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-19T21:25:41.505+05:30  INFO 21764 --- [journeyplus-backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-19T21:25:41.735+05:30  INFO 21764 --- [journeyplus-backend] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-06-19T21:25:41.758+05:30  INFO 21764 --- [journeyplus-backend] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5183 ms
+2026-06-19T21:25:42.228+05:30 ERROR 21764 --- [journeyplus-backend] [main] o.s.b.web.embedded.tomcat.TomcatStarter  : Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthenticationFilter': Unsatisfied dependency expressed through field 'jwtTokenProvider': Error creating bean with name 'jwtTokenProvider': Unsatisfied dependency expressed through field 'publicKey': Error creating bean with name 'publicKey' defined in class path resource [com/journeyplus/config/RSAKeyConfig.class]: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+2026-06-19T21:25:42.305+05:30  INFO 21764 --- [journeyplus-backend] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-06-19T21:25:42.355+05:30  WARN 21764 --- [journeyplus-backend] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2026-06-19T21:25:42.393+05:30  INFO 21764 --- [journeyplus-backend] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-19T21:25:42.460+05:30 ERROR 21764 --- [journeyplus-backend] [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:618) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-3.2.5.jar:3.2.5]
+	at com.journeyplus.JourneyPlusApplication.main(JourneyPlusApplication.java:14) ~[classes/:na]
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:145) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:105) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:499) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:218) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162) ~[spring-boot-3.2.5.jar:3.2.5]
+	... 8 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthenticationFilter': Unsatisfied dependency expressed through field 'jwtTokenProvider': Error creating bean with name 'jwtTokenProvider': Unsatisfied dependency expressed through field 'publicKey': Error creating bean with name 'publicKey' defined in class path resource [com/journeyplus/config/RSAKeyConfig.class]: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:210) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:173) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:168) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:153) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:86) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4880) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:845) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:240) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:921) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:126) ~[spring-boot-3.2.5.jar:3.2.5]
+	... 13 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtTokenProvider': Unsatisfied dependency expressed through field 'publicKey': Error creating bean with name 'publicKey' defined in class path resource [com/journeyplus/config/RSAKeyConfig.class]: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 55 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'publicKey' defined in class path resource [com/journeyplus/config/RSAKeyConfig.class]: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:648) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:485) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1335) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1165) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 69 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:177) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:644) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 82 common frames omitted
+Caused by: java.io.FileNotFoundException: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:215) ~[spring-core-6.1.6.jar:6.1.6]
+	at com.journeyplus.config.RSAKeyConfig.publicKey(RSAKeyConfig.java:27) ~[classes/:na]
+	at com.journeyplus.config.RSAKeyConfig$$SpringCGLIB$$0.CGLIB$publicKey$1(<generated>) ~[classes/:na]
+	at com.journeyplus.config.RSAKeyConfig$$SpringCGLIB$$FastClass$$1.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258) ~[spring-core-6.1.6.jar:6.1.6]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-6.1.6.jar:6.1.6]
+	at com.journeyplus.config.RSAKeyConfig$$SpringCGLIB$$0.publicKey(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:140) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 83 common frames omitted
+
+2026-06-19T21:40:01.121+05:30  INFO 5376 --- [journeyplus-backend] [main] com.journeyplus.JourneyPlusApplication   : Starting JourneyPlusApplication using Java 21 with PID 5376 (C:\Users\2503742\OneDrive - Cognizant\Documents\New Github\Final-JourneyPlus\target\classes started by 2503742 in C:\Users\2503742\OneDrive - Cognizant\Documents\New Github\Final-JourneyPlus)
+2026-06-19T21:40:01.126+05:30  INFO 5376 --- [journeyplus-backend] [main] com.journeyplus.JourneyPlusApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-19T21:40:06.409+05:30  INFO 5376 --- [journeyplus-backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19T21:40:07.093+05:30  INFO 5376 --- [journeyplus-backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 630 ms. Found 17 JPA repository interfaces.
+2026-06-19T21:40:10.952+05:30  INFO 5376 --- [journeyplus-backend] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8091 (http)
+2026-06-19T21:40:11.022+05:30  INFO 5376 --- [journeyplus-backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-19T21:40:11.025+05:30  INFO 5376 --- [journeyplus-backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-19T21:40:11.352+05:30  INFO 5376 --- [journeyplus-backend] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-06-19T21:40:11.353+05:30  INFO 5376 --- [journeyplus-backend] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10067 ms
+2026-06-19T21:40:12.117+05:30 ERROR 5376 --- [journeyplus-backend] [main] o.s.b.web.embedded.tomcat.TomcatStarter  : Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthenticationFilter': Unsatisfied dependency expressed through field 'jwtTokenProvider': Error creating bean with name 'jwtTokenProvider': Unsatisfied dependency expressed through field 'publicKey': Error creating bean with name 'publicKey' defined in class path resource [com/journeyplus/config/RSAKeyConfig.class]: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+2026-06-19T21:40:12.214+05:30  INFO 5376 --- [journeyplus-backend] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-06-19T21:40:12.246+05:30  WARN 5376 --- [journeyplus-backend] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2026-06-19T21:40:12.277+05:30  INFO 5376 --- [journeyplus-backend] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-19T21:40:12.430+05:30 ERROR 5376 --- [journeyplus-backend] [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:618) ~[spring-context-6.1.6.jar:6.1.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-3.2.5.jar:3.2.5]
+	at com.journeyplus.JourneyPlusApplication.main(JourneyPlusApplication.java:14) ~[classes/:na]
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:145) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:105) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:499) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:218) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162) ~[spring-boot-3.2.5.jar:3.2.5]
+	... 8 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthenticationFilter': Unsatisfied dependency expressed through field 'jwtTokenProvider': Error creating bean with name 'jwtTokenProvider': Unsatisfied dependency expressed through field 'publicKey': Error creating bean with name 'publicKey' defined in class path resource [com/journeyplus/config/RSAKeyConfig.class]: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:210) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:173) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:168) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:153) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:86) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52) ~[spring-boot-3.2.5.jar:3.2.5]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4880) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:845) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:240) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:921) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:126) ~[spring-boot-3.2.5.jar:3.2.5]
+	... 13 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtTokenProvider': Unsatisfied dependency expressed through field 'publicKey': Error creating bean with name 'publicKey' defined in class path resource [com/journeyplus/config/RSAKeyConfig.class]: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 55 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'publicKey' defined in class path resource [com/journeyplus/config/RSAKeyConfig.class]: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:648) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:485) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1335) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1165) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 69 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [java.security.interfaces.RSAPublicKey]: Factory method 'publicKey' threw exception with message: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:177) ~[spring-beans-6.1.6.jar:6.1.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:644) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 82 common frames omitted
+Caused by: java.io.FileNotFoundException: class path resource [keys/public.pem] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:215) ~[spring-core-6.1.6.jar:6.1.6]
+	at com.journeyplus.config.RSAKeyConfig.publicKey(RSAKeyConfig.java:27) ~[classes/:na]
+	at com.journeyplus.config.RSAKeyConfig$$SpringCGLIB$$0.CGLIB$publicKey$1(<generated>) ~[classes/:na]
+	at com.journeyplus.config.RSAKeyConfig$$SpringCGLIB$$FastClass$$1.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258) ~[spring-core-6.1.6.jar:6.1.6]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-6.1.6.jar:6.1.6]
+	at com.journeyplus.config.RSAKeyConfig$$SpringCGLIB$$0.publicKey(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:140) ~[spring-beans-6.1.6.jar:6.1.6]
+	... 83 common frames omitted
+
+2026-06-19T22:30:59.484+05:30  INFO 15496 --- [journeyplus-backend] [main] com.journeyplus.JourneyPlusApplication   : Starting JourneyPlusApplication using Java 21 with PID 15496 (C:\Users\2503742\OneDrive - Cognizant\Documents\New Github\Final-JourneyPlus\target\classes started by 2503742 in C:\Users\2503742\OneDrive - Cognizant\Documents\New Github\Final-JourneyPlus)
+2026-06-19T22:30:59.490+05:30  INFO 15496 --- [journeyplus-backend] [main] com.journeyplus.JourneyPlusApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-19T22:31:00.810+05:30  INFO 15496 --- [journeyplus-backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-19T22:31:00.948+05:30  INFO 15496 --- [journeyplus-backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 131 ms. Found 17 JPA repository interfaces.
+2026-06-19T22:31:01.793+05:30  INFO 15496 --- [journeyplus-backend] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8091 (http)
+2026-06-19T22:31:01.809+05:30  INFO 15496 --- [journeyplus-backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-19T22:31:01.810+05:30  INFO 15496 --- [journeyplus-backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-06-19T22:31:01.921+05:30  INFO 15496 --- [journeyplus-backend] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-06-19T22:31:01.921+05:30  INFO 15496 --- [journeyplus-backend] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2348 ms
+2026-06-19T22:31:02.446+05:30  INFO 15496 --- [journeyplus-backend] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-19T22:31:02.675+05:30  INFO 15496 --- [journeyplus-backend] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-06-19T22:31:02.768+05:30  INFO 15496 --- [journeyplus-backend] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-06-19T22:31:03.275+05:30  INFO 15496 --- [journeyplus-backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-19T22:31:03.328+05:30  INFO 15496 --- [journeyplus-backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-19T22:31:03.635+05:30  INFO 15496 --- [journeyplus-backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7c5ac0
+2026-06-19T22:31:03.639+05:30  INFO 15496 --- [journeyplus-backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-19T22:31:03.742+05:30  WARN 15496 --- [journeyplus-backend] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-19T22:31:05.303+05:30  INFO 15496 --- [journeyplus-backend] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-19T22:31:05.663+05:30  INFO 15496 --- [journeyplus-backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-19T22:31:06.931+05:30  INFO 15496 --- [journeyplus-backend] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-19T22:31:08.960+05:30  INFO 15496 --- [journeyplus-backend] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoint(s) beneath base path '/actuator'
+2026-06-19T22:31:09.040+05:30  INFO 15496 --- [journeyplus-backend] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@72584c3f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@66ce59d9, org.springframework.security.web.context.SecurityContextHolderFilter@3044dd80, org.springframework.security.web.header.HeaderWriterFilter@43b8a6de, org.springframework.web.filter.CorsFilter@3fd7be2d, org.springframework.security.web.authentication.logout.LogoutFilter@442bb11b, com.journeyplus.config.JwtAuthenticationFilter@381db99e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@47ccb397, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@60d1b2a7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@34a91445, org.springframework.security.web.session.SessionManagementFilter@6fc26fb1, org.springframework.security.web.access.ExceptionTranslationFilter@18ab9b9e, org.springframework.security.web.access.intercept.AuthorizationFilter@18c805b]
+2026-06-19T22:31:09.058+05:30  INFO 15496 --- [journeyplus-backend] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [Mvc [pattern='/swagger-ui/**'], Mvc [pattern='/v3/api-docs/**'], Mvc [pattern='/swagger-ui.html'], Mvc [pattern='/swagger-ui/index.html'], Mvc [pattern='/webjars/**'], Mvc [pattern='/swagger-resources/**']] with [org.springframework.security.web.session.DisableEncodeUrlFilter@6e236542, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1fd18007, org.springframework.security.web.context.SecurityContextHolderFilter@6000b869, org.springframework.security.web.header.HeaderWriterFilter@35a7c2cc, org.springframework.web.filter.CorsFilter@67e3839b, org.springframework.security.web.authentication.logout.LogoutFilter@105c3bea, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6cdbb5b8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6761bb4d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7e04af28, org.springframework.security.web.session.SessionManagementFilter@4e0b9055, org.springframework.security.web.access.ExceptionTranslationFilter@17236e87, org.springframework.security.web.access.intercept.AuthorizationFilter@4b4a5691]
+2026-06-19T22:31:09.633+05:30  INFO 15496 --- [journeyplus-backend] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8091 (http) with context path ''
+2026-06-19T22:31:09.649+05:30  INFO 15496 --- [journeyplus-backend] [main] com.journeyplus.JourneyPlusApplication   : Started JourneyPlusApplication in 10.585 seconds (process running for 10.905)
+2026-06-19T22:31:34.031+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-8] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19T22:31:34.031+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-8] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-19T22:31:34.039+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-8] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2026-06-19T22:31:36.679+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-2] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 2150 ms
+2026-06-19T23:50:24.622+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-4] c.journeyplus.iam.service.AuthService    : Attempting to register user with username: Userx, role: EMPLOYEE
+2026-06-19T23:50:24.964+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-4] c.journeyplus.iam.service.AuthService    : User 'Userx' auto-approved (Role: EMPLOYEE)
+2026-06-19T23:50:25.043+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-4] c.journeyplus.iam.service.AuthService    : User 'Userx' successfully registered with ID: 28
+2026-06-19T23:51:32.279+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-2] c.journeyplus.iam.service.AuthService    : Authentication attempt for username: Userx
+2026-06-19T23:51:33.256+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-2] c.journeyplus.iam.service.AuthService    : User 'Userx' successfully logged in. Role: EMPLOYEE
+2026-06-19T23:52:03.473+05:30  WARN 15496 --- [journeyplus-backend] [http-nio-8091-exec-9] c.j.config.JwtAuthenticationFilter       : JWT token parsing failed for request [/api/auth/refresh]: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-06-19T23:52:03.479+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-9] c.journeyplus.iam.service.AuthService    : Token refresh attempt started
+2026-06-19T23:52:03.499+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-9] c.journeyplus.iam.service.AuthService    : Token refresh successful for user 'Userx'
+2026-06-19T23:52:17.933+05:30  WARN 15496 --- [journeyplus-backend] [http-nio-8091-exec-10] c.j.config.JwtAuthenticationFilter       : JWT token parsing failed for request [/api/auth/refresh]: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-06-19T23:52:28.502+05:30  WARN 15496 --- [journeyplus-backend] [http-nio-8091-exec-8] c.j.config.JwtAuthenticationFilter       : JWT token parsing failed for request [/api/auth/refresh]: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-06-19T23:52:28.503+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-8] c.journeyplus.iam.service.AuthService    : Token refresh attempt started
+2026-06-19T23:52:28.523+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-8] c.journeyplus.iam.service.AuthService    : Token refresh successful for user 'Userx'
+2026-06-19T23:52:31.109+05:30  WARN 15496 --- [journeyplus-backend] [http-nio-8091-exec-3] c.j.config.JwtAuthenticationFilter       : JWT token parsing failed for request [/api/auth/refresh]: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-06-19T23:52:31.111+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-3] c.journeyplus.iam.service.AuthService    : Token refresh attempt started
+2026-06-19T23:52:31.130+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-3] c.journeyplus.iam.service.AuthService    : Token refresh successful for user 'Userx'
+2026-06-19T23:52:32.450+05:30  WARN 15496 --- [journeyplus-backend] [http-nio-8091-exec-5] c.j.config.JwtAuthenticationFilter       : JWT token parsing failed for request [/api/auth/refresh]: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-06-19T23:52:32.452+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-5] c.journeyplus.iam.service.AuthService    : Token refresh attempt started
+2026-06-19T23:52:32.486+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-5] c.journeyplus.iam.service.AuthService    : Token refresh successful for user 'Userx'
+2026-06-19T23:58:56.851+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-9] c.journeyplus.iam.service.AuthService    : Authentication attempt for username: admin1
+2026-06-19T23:58:57.393+05:30  INFO 15496 --- [journeyplus-backend] [http-nio-8091-exec-9] c.journeyplus.iam.service.AuthService    : User 'admin1' successfully logged in. Role: TRAVEL_ADMIN

@@ -2,12 +2,15 @@ package com.journeyplus.expense.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ExpenseClaimRequest {
     private String claimTitle;
     private LocalDate submittedDate;
     private BigDecimal totalAmount;
     private String originalCurrency;
+    private List<ExpenseLineRequest> expenseLines = new ArrayList<>();
 
     public String getClaimTitle() {
         return claimTitle;
@@ -39,5 +42,16 @@ public class ExpenseClaimRequest {
 
     public void setOriginalCurrency(String originalCurrency) {
         this.originalCurrency = originalCurrency;
+    }
+
+    public List<ExpenseLineRequest> getExpenseLines() {
+        if (expenseLines == null) {
+            expenseLines = new ArrayList<>();
+        }
+        return expenseLines;
+    }
+
+    public void setExpenseLines(List<ExpenseLineRequest> expenseLines) {
+        this.expenseLines = expenseLines;
     }
 }

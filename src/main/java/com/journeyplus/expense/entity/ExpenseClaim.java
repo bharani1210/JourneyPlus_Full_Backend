@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.journeyplus.common.EncryptedBigDecimalConverter;
 import com.journeyplus.iam.entity.User;
 import com.journeyplus.trip.entity.TripRequest;
+import lombok.Getter;
+import lombok.Setter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -25,6 +27,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "expense_claims")
+@Getter
+@Setter
 public class ExpenseClaim {
 
     @Id
@@ -34,11 +38,13 @@ public class ExpenseClaim {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_request_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     private TripRequest tripRequest;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     private User employee;
 
     @Column(name = "claim_title", nullable = false, length = 200)
@@ -93,127 +99,13 @@ public class ExpenseClaim {
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @JsonIgnore
-    public TripRequest getTripRequest() {
-        return tripRequest;
-    }
-
     @JsonProperty("tripRequestId")
     public Long getTripRequestId() {
         return tripRequest != null ? tripRequest.getId() : null;
     }
 
-    public void setTripRequest(TripRequest tripRequest) {
-        this.tripRequest = tripRequest;
-    }
-
-    @JsonIgnore
-    public User getEmployee() {
-        return employee;
-    }
-
     @JsonProperty("employeeId")
     public Long getEmployeeId() {
         return employee != null ? employee.getId() : null;
-    }
-
-    public void setEmployee(User employee) {
-        this.employee = employee;
-    }
-
-    public String getClaimTitle() {
-        return claimTitle;
-    }
-
-    public void setClaimTitle(String claimTitle) {
-        this.claimTitle = claimTitle;
-    }
-
-    public LocalDate getSubmittedDate() {
-        return submittedDate;
-    }
-
-    public void setSubmittedDate(LocalDate submittedDate) {
-        this.submittedDate = submittedDate;
-    }
-
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public String getOriginalCurrency() {
-        return originalCurrency;
-    }
-
-    public void setOriginalCurrency(String originalCurrency) {
-        this.originalCurrency = originalCurrency;
-    }
-
-    public BigDecimal getUsdEquivalent() {
-        return usdEquivalent;
-    }
-
-    public void setUsdEquivalent(BigDecimal usdEquivalent) {
-        this.usdEquivalent = usdEquivalent;
-    }
-
-    public ExpenseStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ExpenseStatus status) {
-        this.status = status;
-    }
-
-    public String getManagerComments() {
-        return managerComments;
-    }
-
-    public void setManagerComments(String managerComments) {
-        this.managerComments = managerComments;
-    }
-
-    public String getFinanceComments() {
-        return financeComments;
-    }
-
-    public void setFinanceComments(String financeComments) {
-        this.financeComments = financeComments;
-    }
-
-    public BigDecimal getAdvanceAdjusted() {
-        return advanceAdjusted;
-    }
-
-    public void setAdvanceAdjusted(BigDecimal advanceAdjusted) {
-        this.advanceAdjusted = advanceAdjusted;
-    }
-
-    public BigDecimal getNetReimbursable() {
-        return netReimbursable;
-    }
-
-    public void setNetReimbursable(BigDecimal netReimbursable) {
-        this.netReimbursable = netReimbursable;
-    }
-
-    public com.journeyplus.iam.entity.User getApprover() {
-        return approver;
-    }
-
-    public void setApprover(com.journeyplus.iam.entity.User approver) {
-        this.approver = approver;
     }
 }

@@ -23,6 +23,7 @@ import com.journeyplus.expense.repository.ExpenseClaimRepository;
 import com.journeyplus.expense.repository.ExpenseLineRepository;
 import com.journeyplus.expense.repository.ReimbursementRepository;
 import com.journeyplus.iam.entity.User;
+import com.journeyplus.expense.dto.ExpenseLineRequest;
 
 @Service
 public class ExpenseService {
@@ -60,12 +61,80 @@ public class ExpenseService {
     @Transactional
     @AuditAction(module = "EXPENSE", action = "CREATE_EXPENSE_CLAIM")
     public ExpenseClaim createExpenseClaim(ExpenseClaim claim) {
+        return createExpenseClaim(claim, null);
+    }
+
+    @Transactional
+    @AuditAction(module = "EXPENSE", action = "CREATE_EXPENSE_CLAIM")
+    public ExpenseClaim createExpenseClaim(ExpenseClaim claim, List<ExpenseLineRequest> lineRequests) {
         log.info("Attempting to create expense claim with title: '{}'", claim.getClaimTitle());
         claim.setStatus(ExpenseStatus.DRAFT);
         claim.setTotalAmount(BigDecimal.ZERO);
         claim.setUsdEquivalent(BigDecimal.ZERO);
         ExpenseClaim saved = expenseClaimRepository.save(claim);
         log.info("Expense claim successfully created with ID: {}", saved.getId());
+
+        if (lineRequests != null && !lineRequests.isEmpty()) {
+            BigDecimal totalAmount = BigDecimal.ZERO;
+            BigDecimal totalUsdEquivalent = BigDecimal.ZERO;
+
+            for (ExpenseLineRequest lineReq : lineRequests) {
+                ExpenseLine line = new ExpenseLine();
+                line.setExpenseDate(lineReq.getExpenseDate());
+                line.setCategory(lineReq.getCategory());
+                line.setAmount(lineReq.getAmount());
+                line.setOriginalCurrency(lineReq.getOriginalCurrency());
+                line.setReceiptPath(lineReq.getReceiptPath());
+
+                // Defensive: do not trust client-supplied identifiers or compliance fields
+                line.setId(null);
+                // Always associate the persisted claim using path variable
+                line.setExpenseClaim(saved);
+                // Ensure a non-null policy compliance status before persisting to avoid DB NOT NULL constraint
+                if (line.getPolicyComplianceStatus() == null) {
+                    line.setPolicyComplianceStatus("COMPLIANT");
+                }
+                // Clear any client-supplied compliance remarks; compliance engine will set them as needed
+                line.setComplianceRemarks(null);
+
+                // Validate amount and currency
+                if (line.getAmount() == null) {
+                    log.warn("Failed to add line: Expense line amount is required");
+                    throw new IllegalArgumentException("Expense line amount is required");
+                }
+                if (line.getOriginalCurrency() == null) {
+                    line.setOriginalCurrency(saved.getOriginalCurrency());
+                }
+
+                // Multi-currency calculation
+                BigDecimal rate = getExchangeRateToUsd(line.getOriginalCurrency());
+                BigDecimal usdEquivalent = line.getAmount().multiply(rate).setScale(2, RoundingMode.HALF_UP);
+                line.setUsdEquivalent(usdEquivalent);
+                log.info("Calculated USD equivalent for line: {} USD (rate: {})", usdEquivalent, rate);
+
+                // 1) Persist ExpenseLine first so subsequent ComplianceAudit/PolicyException can reference its DB id
+                ExpenseLine savedLine = expenseLineRepository.save(line);
+
+                // 2) Run policy compliance checks
+                log.info("Running compliance engine check for line ID: {}", savedLine.getId());
+                complianceEngine.runComplianceCheck(savedLine);
+
+                // 3) Persist any changes made by compliance engine
+                savedLine = expenseLineRepository.save(savedLine);
+                log.info("Compliance check completed for line ID: {}. Status: {}, Remarks: '{}'",
+                        savedLine.getId(), savedLine.getPolicyComplianceStatus(), savedLine.getComplianceRemarks());
+
+                totalAmount = totalAmount.add(savedLine.getAmount());
+                totalUsdEquivalent = totalUsdEquivalent.add(savedLine.getUsdEquivalent());
+            }
+
+            saved.setTotalAmount(totalAmount);
+            saved.setUsdEquivalent(totalUsdEquivalent);
+            saved = expenseClaimRepository.save(saved);
+            log.info("Updated claim ID: {} totals after bulk save -> Original total: {} {}, USD equivalent total: {} USD",
+                    saved.getId(), totalAmount, saved.getOriginalCurrency(), totalUsdEquivalent);
+        }
+
         return saved;
     }
 

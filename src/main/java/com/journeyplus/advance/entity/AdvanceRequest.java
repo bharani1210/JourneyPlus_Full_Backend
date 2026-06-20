@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.journeyplus.common.EncryptedBigDecimalConverter;
 import com.journeyplus.iam.entity.User;
 import com.journeyplus.trip.entity.TripRequest;
+import lombok.Getter;
+import lombok.Setter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -24,6 +26,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "advance_requests")
+@Getter
+@Setter
 public class AdvanceRequest {
 
     @Id
@@ -32,10 +36,12 @@ public class AdvanceRequest {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_request_id", nullable = false)
+    @JsonIgnore
     private TripRequest tripRequest;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false)
+    @JsonIgnore
     private User employee;
 
     @Convert(converter = EncryptedBigDecimalConverter.class)
@@ -55,6 +61,7 @@ public class AdvanceRequest {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "approver_id")
+    @JsonIgnore
     private User approver;
 
     @Column(name = "request_date", nullable = false)
@@ -76,31 +83,9 @@ public class AdvanceRequest {
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @JsonIgnore
-    public TripRequest getTripRequest() {
-        return tripRequest;
-    }
-
     @JsonProperty("tripRequestId")
     public Long getTripRequestId() {
         return tripRequest != null ? tripRequest.getId() : null;
-    }
-
-    public void setTripRequest(TripRequest tripRequest) {
-        this.tripRequest = tripRequest;
-    }
-
-    @JsonIgnore
-    public User getEmployee() {
-        return employee;
     }
 
     @JsonProperty("employeeId")
@@ -108,69 +93,8 @@ public class AdvanceRequest {
         return employee != null ? employee.getId() : null;
     }
 
-    public void setEmployee(User employee) {
-        this.employee = employee;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getOriginalCurrency() {
-        return originalCurrency;
-    }
-
-    public void setOriginalCurrency(String originalCurrency) {
-        this.originalCurrency = originalCurrency;
-    }
-
-    public BigDecimal getUsdEquivalent() {
-        return usdEquivalent;
-    }
-
-    public void setUsdEquivalent(BigDecimal usdEquivalent) {
-        this.usdEquivalent = usdEquivalent;
-    }
-
-    public AdvanceStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AdvanceStatus status) {
-        this.status = status;
-    }
-
-    @JsonIgnore
-    public User getApprover() {
-        return approver;
-    }
-
     @JsonProperty("approverId")
     public Long getApproverId() {
         return approver != null ? approver.getId() : null;
-    }
-
-    public void setApprover(User approver) {
-        this.approver = approver;
-    }
-
-    public LocalDate getRequestDate() {
-        return requestDate;
-    }
-
-    public void setRequestDate(LocalDate requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    public LocalDate getDisbursementDate() {
-        return disbursementDate;
-    }
-
-    public void setDisbursementDate(LocalDate disbursementDate) {
-        this.disbursementDate = disbursementDate;
     }
 }
